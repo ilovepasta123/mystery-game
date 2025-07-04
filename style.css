@@ -1,57 +1,38 @@
 body {
-  margin: 0;
-  padding: 0;
-  background: black;
-  color: lime;
-  font-family: monospace;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.boot-text {
-  font-size: 2rem;
+  background-color: black;
   color: white;
-  animation: fadeIn 2s ease-in-out;
-}
-
-.glitch-text {
-  font-size: 1.2rem;
-  color: red;
-  animation: glitch 0.3s infinite;
+  font-family: monospace;
+  text-align: center;
+  margin-top: 20vh;
 }
 
 .hidden {
   display: none;
 }
 
+.boot-text {
+  font-size: 2em;
+  color: #ccc;
+}
+
+.glitch-text {
+  font-size: 1.5em;
+  color: red;
+  animation: flicker 0.1s infinite;
+}
+
 .choices button {
   margin: 10px;
   padding: 10px 20px;
-  font-size: 1rem;
-  background-color: #222;
-  color: lime;
-  border: 1px solid lime;
+  font-size: 1em;
+  background: none;
+  border: 1px solid white;
+  color: white;
   cursor: pointer;
 }
 
-#response-text {
-  margin-top: 20px;
-  color: red;
-  font-size: 1.1rem;
-}
-
-@keyframes glitch {
-  0% { transform: translate(0); }
-  25% { transform: translate(2px, -2px); }
-  50% { transform: translate(-2px, 2px); }
-  75% { transform: translate(2px, 2px); }
-  100% { transform: translate(0); }
-}
-
-@keyframes fadeIn {
-  0% { opacity: 0; }
+@keyframes flicker {
+  0% { opacity: 1; }
+  50% { opacity: 0.3; }
   100% { opacity: 1; }
 }
