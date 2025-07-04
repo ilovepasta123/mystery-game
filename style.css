@@ -1,3 +1,4 @@
+
 body {
   background-color: black;
   color: white;
@@ -13,6 +14,13 @@ body {
 .boot-text {
   font-size: 2em;
   color: #ccc;
+}
+
+#start-btn {
+  margin-top: 20px;
+  padding: 10px 30px;
+  font-size: 1.2em;
+  cursor: pointer;
 }
 
 .glitch-text {
@@ -41,4 +49,3 @@ body {
   50% { opacity: 0.3; }
   100% { opacity: 1; }
 }
-
