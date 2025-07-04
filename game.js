@@ -1,14 +1,14 @@
-const startBtn = document.getElementById("start-btn");
-const startScreen = document.getElementById("start-screen");
 const boot = document.getElementById("ps-boot");
 const glitch = document.getElementById("glitch-crash");
 const terminal = document.getElementById("terminal");
 const responseText = document.getElementById("response-text");
 const glitchSound = document.getElementById("glitch-sound");
 const redDoorDiv = document.getElementById("red-door");
+const nameInputScene = document.getElementById("name-input-scene");
+const startBtn = document.getElementById("start-btn");
 
 startBtn.addEventListener("click", () => {
-  startScreen.classList.add("hidden");
+  document.getElementById("start-screen").classList.add("hidden");
   startGame();
 });
 
@@ -17,6 +17,7 @@ function startGame() {
   glitch.classList.add("hidden");
   terminal.classList.add("hidden");
   redDoorDiv.classList.add("hidden");
+  nameInputScene.classList.add("hidden");
   responseText.textContent = "";
 
   setTimeout(() => {
@@ -34,14 +35,13 @@ function startGame() {
     }, 3000);
   }, 2000);
 }
+
 function respond(choice) {
-  const choicesDiv = document.querySelector(".choices");
-  responseText.textContent = "";
-  choicesDiv.style.display = "none";
+  document.querySelector(".choices").style.display = "none";
 
   if (choice === "A") {
     const code = prompt("Enter access code:");
-    if (["1701", "6729", "0990", "1223"].includes(code)) {
+    if (["1701", "6729"].includes(code)) {
       responseText.textContent = "CODE ACCEPTED.";
       setTimeout(() => {
         terminal.classList.add("hidden");
@@ -49,56 +49,44 @@ function respond(choice) {
       }, 2000);
     } else {
       responseText.textContent = "ACCESS DENIED. CODE UNRECOGNIZED.";
-      setTimeout(() => {
-        startGame();
-      }, 3000);
+      setTimeout(() => startGame(), 3000);
     }
-  }
-
-  else if (choice === "B") {
+  } else if (choice === "B") {
     responseText.textContent = "SILENCE... JUST LIKE BEFORE.";
-    setTimeout(() => {
-      startGame();
-    }, 3000);
-  }
-
-  else if (choice === "C") {
+    setTimeout(() => startGame(), 3000);
+  } else if (choice === "C") {
     responseText.textContent = "I am what’s left of you.";
+    setTimeout(() => startGame(), 3000);
+  } else if (choice === "D") {
+    responseText.textContent = "Try one of these codes: 1223, 0990, 5658, 6729, 1701.";
     setTimeout(() => {
-      startGame();
+      document.querySelector(".choices").style.display = "block";
     }, 3000);
-  }
-
-  else if (choice === "D") {
-    // Show fake clues
-    const clueOptions = `
-      <p>Clue Codes:</p>
-      <button onclick="enterClue('0990')">0990</button>
-      <button onclick="enterClue('6729')">6729</button>
-      <button onclick="enterClue('1223')">1223</button>
-    `;
-    responseText.innerHTML = clueOptions;
   }
 }
 
-
-
 function redDoor() {
+  glitch.classList.add("hidden");
   terminal.classList.add("hidden");
   redDoorDiv.classList.remove("hidden");
   glitchSound.pause();
 }
 
 function openDoor() {
-  redDoorDiv.innerHTML = "<p class='door-text'>...</p><p class='door-text'>You chose to remember.</p>";
+  redDoorDiv.classList.add("hidden");
+  nameInputScene.classList.remove("hidden");
   document.body.style.backgroundColor = "black";
-  setTimeout(() => {
-    alert("Chapter 2 coming soon...");
-  }, 3000);
 }
-function enterClue(code) {
-  responseText.textContent = `Code ${code} logged. Try it using option A.`;
+
+function submitName() {
+  const name = document.getElementById("player-name").value.trim();
+  if (name === "") {
+    alert("Please enter your name.");
+    return;
+  }
+
+  nameInputScene.innerHTML = `<p class='door-text'>Welcome, ${name}. Your journey begins now...</p>`;
   setTimeout(() => {
-    startGame();
+    alert("Chapter 2 (Runner-style game) coming soon...");
   }, 3000);
 }
