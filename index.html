@@ -4,9 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The Forbidden Game</title>
+
+  <!-- Load creepy terminal font -->
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css"/>
 </head>
-  <link rel="stylesheet" href="style.css" />
 <body>
   <!-- Start Button -->
   <div id="start-screen">
@@ -15,18 +17,18 @@
 
   <!-- Fake Boot Screen -->
   <div id="ps-boot" class="hidden">
-    <p class="boot-text">Welecome back Subject 7t</p>
+    <p class="boot-text">Welcome back, Subject 07</p>
   </div>
 
   <!-- Glitch Crash -->
   <div id="glitch-crash" class="hidden">
-    <p class="glitch-text"></p>
+    <p class="glitch-text">ERROR 0x80070005<br>UNAUTHORIZED ACCESS</p>
   </div>
 
   <!-- Terminal Interaction -->
   <div id="terminal" class="hidden">
-    <p>> Welcome back, Subject 07</p>
-    <p>> Do you still remember the truth?</p>
+    <p>&gt; Welcome back, Subject 07</p>
+    <p>&gt; Do you still remember the truth?</p>
     <div class="choices">
       <button onclick="respond('A')">[ A ] Enter the code</button>
       <button onclick="respond('B')">[ B ] Say nothing</button>
@@ -39,7 +41,7 @@
   <!-- Red Door -->
   <div id="red-door" class="hidden">
     <p class="door-text">A door appears before you, glowing red.<br>Do you open it?</p>
-    <button onclick="openDoor()">> Open the door</button>
+    <button onclick="openDoor()">&gt; Open the door</button>
   </div>
 
   <!-- Sound -->
@@ -49,4 +51,3 @@
   <script src="game.js"></script>
 </body>
 </html>
-
