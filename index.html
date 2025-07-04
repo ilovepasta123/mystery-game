@@ -30,6 +30,7 @@
       <button onclick="respond('A')">[ A ] Enter the code</button>
       <button onclick="respond('B')">[ B ] Say nothing</button>
       <button onclick="respond('C')">[ C ] Ask “Who are you?”</button>
+      <button onclick="respond('D')">[ D ] clues here maybe”</button>
     </div>
     <p id="response-text"></p>
 
@@ -50,5 +51,12 @@
   <audio id="glitch-sound" src="glitch.mp3" loop></audio>
 
   <script src="game.js"></script>
+<!-- Clue Menu (hidden by default) -->
+<div id="clue-menu" class="hidden">
+  <p>Choose a clue:</p>
+  <div id="clue-options"></div>
+  <button onclick="closeClueMenu()">Close</button>
+</div>
+
 </body>
 </html>
