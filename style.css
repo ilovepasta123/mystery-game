@@ -1,7 +1,5 @@
-/* Import Creepy Terminal Font */
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
-/* Global Body Styles */
 body {
   background-color: black;
   color: #00ffcc;
@@ -9,40 +7,35 @@ body {
   text-align: center;
   margin: 0;
   padding: 0;
-  margin-top: 20vh;
 }
 
-/* Boot Screen Text */
-.boot-text {
-  font-size: 2rem;
-  letter-spacing: 2px;
-  color: #00ffcc;
-}
-
-/* Hidden State */
 .hidden {
   display: none;
 }
 
-/* Start Button */
-#start-btn {
-  margin-top: 20px;
-  padding: 10px 30px;
-  font-size: 1.2em;
-  cursor: pointer;
-  border: 2px solid #00ffcc;
-  background: transparent;
-  color: #00ffcc;
+.boot-text {
+  font-size: 2em;
+  color: #ccc;
+  padding-top: 20vh;
 }
 
-/* Glitch Text */
+#start-btn {
+  margin-top: 40vh;
+  padding: 12px 40px;
+  font-size: 1.5em;
+  cursor: pointer;
+  background-color: black;
+  color: white;
+  border: 2px solid white;
+}
+
 .glitch-text {
   font-size: 1.5em;
   color: red;
   animation: flicker 0.1s infinite;
+  margin-top: 20vh;
 }
 
-/* Terminal Choice Buttons */
 .choices button {
   margin: 10px;
   padding: 10px 20px;
@@ -53,13 +46,12 @@ body {
   cursor: pointer;
 }
 
-/* Red Door Text */
 .door-text {
   font-size: 1.5em;
   color: crimson;
+  margin-top: 20vh;
 }
 
-/* Flicker Animation */
 @keyframes flicker {
   0% { opacity: 1; }
   50% { opacity: 0.3; }
