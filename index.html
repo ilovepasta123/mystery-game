@@ -4,13 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The Forbidden Game</title>
-
-  <!-- Load creepy terminal font -->
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Start Button -->
+  <!-- Start Screen -->
   <div id="start-screen">
     <button id="start-btn">Start</button>
   </div>
@@ -33,7 +30,6 @@
       <button onclick="respond('A')">[ A ] Enter the code</button>
       <button onclick="respond('B')">[ B ] Say nothing</button>
       <button onclick="respond('C')">[ C ] Ask “Who are you?”</button>
-      <button onclick="respond('D')">[ D ] 🔢?</button>
     </div>
     <p id="response-text"></p>
   </div>
@@ -41,7 +37,7 @@
   <!-- Red Door -->
   <div id="red-door" class="hidden">
     <p class="door-text">A door appears before you, glowing red.<br>Do you open it?</p>
-    <button onclick="openDoor()">&gt; Open the door</button>
+    <button onclick="openDoor()">> Open the door</button>
   </div>
 
   <!-- Sound -->
@@ -51,3 +47,4 @@
   <script src="game.js"></script>
 </body>
 </html>
+
