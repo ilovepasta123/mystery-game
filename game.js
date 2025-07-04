@@ -38,7 +38,7 @@ function startGame() {
 function respond(choice) {
   document.querySelector(".choices").style.display = "none";
 
-  if (choice === "A" || choice === "D") {
+  if (choice === "A") {
     const code = prompt("Enter access code:");
     if (code === "1701" || code === "6729") {
       responseText.textContent = "CODE ACCEPTED.";
@@ -46,21 +46,28 @@ function respond(choice) {
         terminal.classList.add("hidden");
         redDoor();
       }, 2000);
-      return;
     } else {
       responseText.textContent = "ACCESS DENIED. CODE UNRECOGNIZED.";
+      setTimeout(() => {
+        startGame();
+      }, 3000);
     }
+  } else if (choice === "D") {
+    responseText.textContent = "Try one of these codes: 1223, 0990, 5658, 6729, 1707";
+    setTimeout(() => {
+      startGame();
+    }, 4000);
   } else if (choice === "B") {
     responseText.textContent = "SILENCE... JUST LIKE BEFORE.";
+    setTimeout(() => {
+      startGame();
+    }, 3000);
   } else if (choice === "C") {
     responseText.textContent = "I am what’s left of you.";
-      else if (choice === "D")
-       responseText.textContent = "code is 6729 and 1701.";
+    setTimeout(() => {
+      startGame();
+    }, 3000);
   }
-
-  setTimeout(() => {
-    startGame();
-  }, 3000);
 }
 
 function redDoor() {
