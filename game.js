@@ -34,7 +34,7 @@ function startGame() {
 
       // Simulate SMS
       setTimeout(() => {
-        responseText.textContent = "📩 SMS: Here is the code, Subject 07.";
+        responseText.textContent = "📩 SMS: Here is the code 6729 Subject 07.";
       }, 1500);
 
     }, 3000);
