@@ -9,7 +9,6 @@ const startBtn = document.getElementById("start-btn");
 
 startBtn.addEventListener("click", () => {
   startScreen.classList.add("hidden");
-  boot.classList.remove("hidden");
   startGame();
 });
 
@@ -20,7 +19,6 @@ function startGame() {
   redDoorDiv.classList.add("hidden");
   responseText.textContent = "";
 
-  // Boot → Glitch → Terminal
   setTimeout(() => {
     boot.classList.add("hidden");
     glitch.classList.remove("hidden");
@@ -33,8 +31,14 @@ function startGame() {
       glitch.classList.add("hidden");
       terminal.classList.remove("hidden");
       document.querySelector(".choices").style.display = "block";
-    }, 1500); // glitch duration
-  }, 1000); // boot duration
+
+      // Simulate SMS
+      setTimeout(() => {
+        responseText.textContent = "📩 SMS: Here is the code, Subject 07.";
+      }, 1500);
+
+    }, 3000);
+  }, 1000);
 }
 
 function respond(choice) {
@@ -48,33 +52,23 @@ function respond(choice) {
         terminal.classList.add("hidden");
         redDoor();
       }, 2000);
+      return;
     } else {
       responseText.textContent = "ACCESS DENIED. CODE UNRECOGNIZED.";
-      setTimeout(() => {
-        startGame();
-      }, 3000);
     }
-  } else if (choice === "D") {
-    responseText.textContent = "Try one of these codes: 1223, 0990, 5658, 6729, 1707";
-    setTimeout(() => {
-      startGame();
-    }, 4000);
   } else if (choice === "B") {
     responseText.textContent = "SILENCE... JUST LIKE BEFORE.";
-    setTimeout(() => {
-      startGame();
-    }, 3000);
   } else if (choice === "C") {
     responseText.textContent = "I am what’s left of you.";
-    setTimeout(() => {
-      startGame();
-    }, 3000);
   }
+
+  setTimeout(() => {
+    startGame();
+  }, 3000);
 }
 
 function redDoor() {
   glitch.classList.add("hidden");
-  terminal.classList.add("hidden");
   redDoorDiv.classList.remove("hidden");
   glitchSound.pause();
 }
@@ -86,3 +80,4 @@ function openDoor() {
     alert("Chapter 2 coming soon...");
   }, 3000);
 }
+
