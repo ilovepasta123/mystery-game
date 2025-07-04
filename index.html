@@ -2,22 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The Forbidden Game</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <!-- Boot Screen -->
   <div id="ps-boot">
     <p class="boot-text">Sony Computer Entertainment</p>
+    <button id="start-btn">Start</button>
   </div>
 
-  <!-- Glitch Crash -->
   <div id="glitch-crash" class="hidden">
     <p class="glitch-text">ERROR 0x80070005<br>UNAUTHORIZED ACCESS</p>
   </div>
 
-  <!-- Terminal Screen -->
   <div id="terminal" class="hidden">
     <p>> Welcome back, Subject 07</p>
     <p>> Do you still remember the truth?</p>
@@ -29,16 +27,12 @@
     <p id="response-text"></p>
   </div>
 
-  <!-- Red Door Scene -->
   <div id="red-door" class="hidden">
     <p class="door-text">A door appears before you, glowing red.<br>Do you open it?</p>
     <button onclick="openDoor()">> Open the door</button>
   </div>
 
-  <!-- Glitch Sound -->
   <audio id="glitch-sound" src="glitch.mp3" loop></audio>
-
-  <!-- Game Script -->
   <script src="game.js"></script>
 </body>
 </html>
