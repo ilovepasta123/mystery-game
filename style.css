@@ -13,17 +13,16 @@ body {
   display: none;
 }
 
-.boot-text {
-  font-size: 2em;
-  padding-top: 20vh;
-  color: #00ffcc;
-}
-
 #start-btn {
   margin-top: 20vh;
   padding: 10px 30px;
   font-size: 1.2em;
   cursor: pointer;
+}
+
+.boot-text {
+  font-size: 2em;
+  margin-top: 20vh;
 }
 
 .glitch-text {
@@ -51,27 +50,4 @@ body {
   0% { opacity: 1; }
   50% { opacity: 0.3; }
   100% { opacity: 1; }
-}
-
-#sms-popup {
-  margin-top: 30px;
-  background: #111;
-  border: 1px solid #00ffcc;
-  padding: 15px;
-  color: #00ffcc;
-  font-size: 0.95em;
-  border-radius: 6px;
-  display: inline-block;
-  box-shadow: 0 0 10px #00ffcc66;
-}
-
-#sms-popup button {
-  margin-top: 10px;
-  padding: 5px 10px;
-  font-size: 0.8em;
-  background: #00ffcc;
-  color: #000;
-  border: none;
-  cursor: pointer;
-  border-radius: 4px;
 }
