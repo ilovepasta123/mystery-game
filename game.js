@@ -34,13 +34,14 @@ function startGame() {
     }, 3000);
   }, 2000);
 }
-
 function respond(choice) {
-  document.querySelector(".choices").style.display = "none";
+  const choicesDiv = document.querySelector(".choices");
+  responseText.textContent = "";
+  choicesDiv.style.display = "none";
 
   if (choice === "A") {
     const code = prompt("Enter access code:");
-    if (code === "1701" || code === "6729") {
+    if (["1701", "6729", "0990", "1223"].includes(code)) {
       responseText.textContent = "CODE ACCEPTED.";
       setTimeout(() => {
         terminal.classList.add("hidden");
@@ -50,35 +51,36 @@ function respond(choice) {
       responseText.textContent = "ACCESS DENIED. CODE UNRECOGNIZED.";
       setTimeout(() => {
         startGame();
-      }, 2000);
+      }, 3000);
     }
-  } else if (choice === "B") {
+  }
+
+  else if (choice === "B") {
     responseText.textContent = "SILENCE... JUST LIKE BEFORE.";
     setTimeout(() => {
       startGame();
-    }, 2000);
-  } else if (choice === "C") {
+    }, 3000);
+  }
+
+  else if (choice === "C") {
     responseText.textContent = "I am what’s left of you.";
     setTimeout(() => {
       startGame();
     }, 3000);
-  } else if (choice === "D") {
-    const clues = [
-      "Try this: 1223, 0990, 5658, 6729, 1701",
-      "One of these is correct: 9999, 1701, 0010",
-      "Only the worthy know: 5658, 1234, 6729",
-      "They used 0990 once. Maybe again?",
-      "Do you trust 1701 or 6729?"
-    ];
-    const random = clues[Math.floor(Math.random() * clues.length)];
-    responseText.textContent = random;
+  }
 
-    // Show choices again after a moment (optional)
-    setTimeout(() => {
-      document.querySelector(".choices").style.display = "block";
-    }, 3000);
+  else if (choice === "D") {
+    // Show fake clues
+    const clueOptions = `
+      <p>Clue Codes:</p>
+      <button onclick="enterClue('0990')">0990</button>
+      <button onclick="enterClue('6729')">6729</button>
+      <button onclick="enterClue('1223')">1223</button>
+    `;
+    responseText.innerHTML = clueOptions;
   }
 }
+
 
 
 function redDoor() {
@@ -92,5 +94,11 @@ function openDoor() {
   document.body.style.backgroundColor = "black";
   setTimeout(() => {
     alert("Chapter 2 coming soon...");
+  }, 3000);
+}
+function enterClue(code) {
+  responseText.textContent = `Code ${code} logged. Try it using option A.`;
+  setTimeout(() => {
+    startGame();
   }, 3000);
 }
