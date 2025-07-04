@@ -8,66 +8,50 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-#start-screen {
   text-align: center;
 }
 
-.intro-text {
-  font-size: 1.5rem;
-  margin-bottom: 30px;
+.boot-text {
+  font-size: 2rem;
   color: white;
+  animation: fadeIn 2s ease-in-out;
 }
 
-#start-btn {
-  font-size: 2rem;
-  padding: 20px 40px;
-  background-color: red;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
+.glitch-text {
+  font-size: 1.2rem;
+  color: red;
+  animation: glitch 0.3s infinite;
 }
 
 .hidden {
   display: none;
 }
 
-.fake-desktop {
-  text-align: left;
-  font-size: 1.2rem;
-  padding: 20px;
-  color: #0f0;
-  animation: screenFlicker 2s infinite;
+.choices button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #222;
+  color: lime;
+  border: 1px solid lime;
+  cursor: pointer;
 }
 
-.glitch-message {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 1.5rem;
-  text-align: center;
-  animation: glitch 0.2s infinite;
+#response-text {
+  margin-top: 20px;
   color: red;
-}
-
-@keyframes screenFlicker {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+  font-size: 1.1rem;
 }
 
 @keyframes glitch {
-  0% { transform: translate(-50%, -50%) scale(1); }
-  50% { transform: translate(-50.2%, -50.1%) scale(1.01); }
-  100% { transform: translate(-49.8%, -50.2%) scale(1); }
+  0% { transform: translate(0); }
+  25% { transform: translate(2px, -2px); }
+  50% { transform: translate(-2px, 2px); }
+  75% { transform: translate(2px, 2px); }
+  100% { transform: translate(0); }
 }
 
-.blinker {
-  animation: blink 1s step-start infinite;
-}
-
-@keyframes blink {
-  50% { opacity: 0; }
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
