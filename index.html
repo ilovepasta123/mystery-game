@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Forbidden Game - Chapter 2</title>
+  <title>The Forbidden Game</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     body {
@@ -19,7 +19,7 @@
       display: none;
     }
 
-    #name-screen, #mission-screen, #disappointed, #game-screen {
+    #start-screen, #ps-boot, #glitch-crash, #terminal, #red-door, #name-screen, #mission-screen, #disappointed, #game-screen {
       margin-top: 25vh;
     }
 
@@ -61,7 +61,36 @@
   </style>
 </head>
 <body>
-  <div id="name-screen">
+  <div id="start-screen">
+    <button onclick="startGameIntro()">Start</button>
+  </div>
+
+  <div id="ps-boot" class="hidden">
+    <p class="boot-text">Welcome back Subject 07</p>
+  </div>
+
+  <div id="glitch-crash" class="hidden">
+    <p class="glitch-text">SYSTEM ERROR... RECONNECTING...</p>
+  </div>
+
+  <div id="terminal" class="hidden">
+    <p>&gt; Welcome back, Subject 07</p>
+    <p>&gt; Do you still remember the truth?</p>
+    <div class="choices">
+      <button onclick="respond('A')">[ A ] Enter the code</button>
+      <button onclick="respond('B')">[ B ] Say nothing</button>
+      <button onclick="respond('C')">[ C ] Ask “Who are you?”</button>
+      <button onclick="respond('D')">[ D ] Clues here maybe</button>
+    </div>
+    <p id="response-text"></p>
+  </div>
+
+  <div id="red-door" class="hidden">
+    <p class="door-text">A door appears before you, glowing red.<br>Do you open it?</p>
+    <button onclick="openDoor()">&gt; Open the door</button>
+  </div>
+
+  <div id="name-screen" class="hidden">
     <p>Welcome back, Subject 07.<br>We're glad you made it back.<br>Now tell me... what is your name?</p>
     <input type="text" id="player-name" placeholder="Enter your name" />
     <br />
@@ -86,6 +115,41 @@
   <script>
     let playerName = "";
     let ctx, player, ammo, score, missed;
+
+    function startGameIntro() {
+      document.getElementById("start-screen").classList.add("hidden");
+      document.getElementById("ps-boot").classList.remove("hidden");
+      setTimeout(() => {
+        document.getElementById("ps-boot").classList.add("hidden");
+        document.getElementById("glitch-crash").classList.remove("hidden");
+        setTimeout(() => {
+          document.getElementById("glitch-crash").classList.add("hidden");
+          document.getElementById("terminal").classList.remove("hidden");
+        }, 2000);
+      }, 2000);
+    }
+
+    function respond(option) {
+      const responseText = document.getElementById("response-text");
+      if (option === 'A') {
+        responseText.textContent = "Correct. Access granted.";
+        setTimeout(() => {
+          document.getElementById("terminal").classList.add("hidden");
+          document.getElementById("red-door").classList.remove("hidden");
+        }, 2000);
+      } else if (option === 'B') {
+        responseText.textContent = "... Still silent. As expected.";
+      } else if (option === 'C') {
+        responseText.textContent = "You know who I am. You just forgot.";
+      } else if (option === 'D') {
+        responseText.textContent = "Clue: It's always been in front of you. Try again.";
+      }
+    }
+
+    function openDoor() {
+      document.getElementById("red-door").classList.add("hidden");
+      document.getElementById("name-screen").classList.remove("hidden");
+    }
 
     function submitName() {
       const input = document.getElementById("player-name");
@@ -133,18 +197,14 @@
     function gameLoop() {
       ctx.clearRect(0, 0, 400, 600);
 
-      // Draw player
       ctx.fillStyle = "#00ffcc";
       ctx.fillRect(player.x, player.y, player.width, player.height);
 
-      // Draw ammo
       ctx.fillStyle = "crimson";
       ctx.fillRect(ammo.x, ammo.y, ammo.width, ammo.height);
 
-      // Move ammo
       ammo.y += ammo.speed;
 
-      // Check collision
       if (
         ammo.y + ammo.height >= player.y &&
         ammo.x + ammo.width >= player.x &&
@@ -157,7 +217,6 @@
         resetAmmo();
       }
 
-      // Show score
       ctx.fillStyle = "white";
       ctx.font = "16px monospace";
       ctx.fillText("Ammo Collected: " + score, 10, 20);
