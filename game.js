@@ -1,24 +1,31 @@
-const boot = document.getElementById("ps-boot");
+
+    const boot = document.getElementById("ps-boot");
 const glitch = document.getElementById("glitch-crash");
 const terminal = document.getElementById("terminal");
 const responseText = document.getElementById("response-text");
 const glitchSound = document.getElementById("glitch-sound");
 const redDoorDiv = document.getElementById("red-door");
+const startBtn = document.getElementById("start-btn");
+
+startBtn.addEventListener("click", () => {
+  startBtn.style.display = "none";
+  startGame();
+});
 
 function startGame() {
-  // Reset everything
   boot.classList.remove("hidden");
   glitch.classList.add("hidden");
   terminal.classList.add("hidden");
   redDoorDiv.classList.add("hidden");
   responseText.textContent = "";
 
-  // Intro boot sequence
   setTimeout(() => {
     boot.classList.add("hidden");
     glitch.classList.remove("hidden");
     glitchSound.currentTime = 0;
-    glitchSound.play();
+    glitchSound.play().catch(() => {
+      console.warn("Autoplay blocked.");
+    });
 
     setTimeout(() => {
       glitch.classList.add("hidden");
@@ -27,8 +34,6 @@ function startGame() {
     }, 3000);
   }, 2000);
 }
-
-window.onload = startGame;
 
 function respond(choice) {
   document.querySelector(".choices").style.display = "none";
@@ -51,13 +56,11 @@ function respond(choice) {
     responseText.textContent = "I am what’s left of you.";
   }
 
-  // Restart game sequence after delay
   setTimeout(() => {
     startGame();
   }, 3000);
 }
 
-// Red Door scene logic
 function redDoor() {
   glitch.classList.add("hidden");
   redDoorDiv.classList.remove("hidden");
