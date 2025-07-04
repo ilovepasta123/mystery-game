@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The Forbidden Game</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
   <!-- Start Screen -->
@@ -12,7 +12,7 @@
     <button id="start-btn">Start</button>
   </div>
 
-  <!-- Fake Boot Screen -->
+  <!-- Boot Screen -->
   <div id="ps-boot" class="hidden">
     <p class="boot-text">Welcome back, Subject 07</p>
   </div>
@@ -22,16 +22,22 @@
     <p class="glitch-text">ERROR 0x80070005<br>UNAUTHORIZED ACCESS</p>
   </div>
 
-  <!-- Terminal Interaction -->
+  <!-- Terminal -->
   <div id="terminal" class="hidden">
-    <p>&gt; Welcome back, Subject 07</p>
-    <p>&gt; Do you still remember the truth?</p>
+    <p>> Welcome back, Subject 07</p>
+    <p>> Do you still remember the truth?</p>
     <div class="choices">
       <button onclick="respond('A')">[ A ] Enter the code</button>
       <button onclick="respond('B')">[ B ] Say nothing</button>
       <button onclick="respond('C')">[ C ] Ask “Who are you?”</button>
     </div>
     <p id="response-text"></p>
+
+    <!-- SMS appears inside terminal -->
+    <div id="sms-popup" class="hidden">
+      <p>📩 SMS: Here is the code, Subject 07.</p>
+      <button id="close-sms">Close</button>
+    </div>
   </div>
 
   <!-- Red Door -->
@@ -43,8 +49,6 @@
   <!-- Sound -->
   <audio id="glitch-sound" src="glitch.mp3" loop></audio>
 
-  <!-- JS -->
   <script src="game.js"></script>
 </body>
 </html>
-
