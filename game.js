@@ -62,8 +62,24 @@ function respond(choice) {
     setTimeout(() => {
       startGame();
     }, 3000);
+  } else if (choice === "D") {
+    const clues = [
+      "Try this: 1223, 0990, 5658, 6729, 1701",
+      "One of these is correct: 9999, 1701, 0010",
+      "Only the worthy know: 5658, 1234, 6729",
+      "They used 0990 once. Maybe again?",
+      "Do you trust 1701 or 6729?"
+    ];
+    const random = clues[Math.floor(Math.random() * clues.length)];
+    responseText.textContent = random;
+
+    // Show choices again after a moment (optional)
+    setTimeout(() => {
+      document.querySelector(".choices").style.display = "block";
+    }, 3000);
   }
 }
+
 
 function redDoor() {
   terminal.classList.add("hidden");
