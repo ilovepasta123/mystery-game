@@ -7,14 +7,22 @@
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <div id="ps-boot">
-    <p class="boot-text">welcome back subject 7 </p>
+  <!-- Start Button -->
+  <div id="start-screen">
     <button id="start-btn">Start</button>
   </div>
 
-  <div id="glitch-crash" class="hidden">
+  <!-- Fake Boot Screen -->
+  <div id="ps-boot" class="hidden">
+    <p class="boot-text">Sony Computer Entertainment</p>
   </div>
 
+  <!-- Glitch Crash -->
+  <div id="glitch-crash" class="hidden">
+    <p class="glitch-text">ERROR 0x80070005<br>UNAUTHORIZED ACCESS</p>
+  </div>
+
+  <!-- Terminal Interaction -->
   <div id="terminal" class="hidden">
     <p>> Welcome back, Subject 07</p>
     <p>> Do you still remember the truth?</p>
@@ -22,17 +30,22 @@
       <button onclick="respond('A')">[ A ] Enter the code</button>
       <button onclick="respond('B')">[ B ] Say nothing</button>
       <button onclick="respond('C')">[ C ] Ask “Who are you?”</button>
-       <button onclick="respond('D')">[ D ] 🔢?”</button>
+      <button onclick="respond('D')">[ D ] 🔢?</button>
     </div>
     <p id="response-text"></p>
   </div>
 
+  <!-- Red Door -->
   <div id="red-door" class="hidden">
     <p class="door-text">A door appears before you, glowing red.<br>Do you open it?</p>
     <button onclick="openDoor()">> Open the door</button>
   </div>
 
+  <!-- Sound -->
   <audio id="glitch-sound" src="glitch.mp3" loop></audio>
+
+  <!-- JS -->
   <script src="game.js"></script>
 </body>
 </html>
+
