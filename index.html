@@ -3,23 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mystery Game</title>
+  <title>The Forbidden Game</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="start-screen">
-    <p class="intro-text">Do you wish to know the truth?</p>
-    <button id="start-btn">START</button>
+  <div id="ps-boot">
+    <p class="boot-text">Sony Computer Entertainment</p>
   </div>
 
-  <div id="glitch-scene" class="hidden">
-    <div class="fake-desktop">
-      <p class="terminal">Booting <span class="blinker">█</span></p>
+  <div id="glitch-crash" class="hidden">
+    <p class="glitch-text">ERROR 0x80070005<br>UNAUTHORIZED ACCESS</p>
+  </div>
+
+  <div id="terminal" class="hidden">
+    <p>> Welcome back, Subject 07</p>
+    <p>> Do you still remember the truth?</p>
+    <div class="choices">
+      <button onclick="respond('A')">[ A ] Enter the code</button>
+      <button onclick="respond('B')">[ B ] Say nothing</button>
+      <button onclick="respond('C')">[ C ] Ask “Who are you?”</button>
     </div>
-    <div class="glitch-message hidden">
-      <p>“You’ve been selected.”</p>
-      <p>“Uploading consciousness...”</p>
-    </div>
+    <p id="response-text"></p>
   </div>
 
   <script src="game.js"></script>
