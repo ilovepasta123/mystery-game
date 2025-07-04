@@ -17,40 +17,30 @@
     <p class="boot-text">Welcome back, Subject 07</p>
   </div>
 
-  <!-- Glitch Crash -->
+  <!-- Glitch Screen -->
   <div id="glitch-crash" class="hidden">
-    <p class="glitch-text"><a error rebooting system/p>
+    <p class="glitch-text">ERROR 0x80070005<br>UNAUTHORIZED ACCESS</p>
   </div>
 
   <!-- Terminal -->
   <div id="terminal" class="hidden">
-    <p>> Welcome back, Subject 07</p>
     <p>> Do you still remember the truth?</p>
     <div class="choices">
       <button onclick="respond('A')">[ A ] Enter the code</button>
       <button onclick="respond('B')">[ B ] Say nothing</button>
       <button onclick="respond('C')">[ C ] Ask “Who are you?”</button>
-      <button onclick="respond('D')">[ D ] clues here maybe”</button>
+      <button onclick="showClueOptions()">[ D ] clues here maybe</button>
     </div>
     <p id="response-text"></p>
+  </div>
 
-   
   <!-- Red Door -->
   <div id="red-door" class="hidden">
     <p class="door-text">A door appears before you, glowing red.<br>Do you open it?</p>
     <button onclick="openDoor()">> Open the door</button>
   </div>
 
-  <!-- Sound -->
   <audio id="glitch-sound" src="glitch.mp3" loop></audio>
-
   <script src="game.js"></script>
-<!-- Clue Menu (hidden by default) -->
-<div id="clue-menu" class="hidden">
-  <p>Choose a clue:</p>
-  <div id="clue-options"></div>
-  <button onclick="closeClueMenu()">Close</button>
-</div>
-
 </body>
 </html>
