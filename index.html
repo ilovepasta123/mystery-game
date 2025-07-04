@@ -1,10 +1,29 @@
-<!-- Glitch Scene (Hidden by Default) -->
-<div id="glitch-scene" class="hidden">
-  <div class="fake-desktop">
-    <p class="terminal">Booting <span class="blinker">█</span></p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>System: Echelon</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Start Screen -->
+  <div id="start-screen">
+    <p class="intro-text">Do you wish to know the truth?</p>
+    <button id="start-btn">START</button>
   </div>
-  <div class="glitch-message hidden">
-    <p>“You’ve been selected.”</p>
-    <p>“Uploading consciousness...”</p>
+
+  <!-- Glitch Scene (Hidden by Default) -->
+  <div id="glitch-scene" class="hidden">
+    <div class="fake-desktop">
+      <p class="terminal">Booting <span class="blinker">█</span></p>
+    </div>
+    <div class="glitch-message hidden">
+      <p>“You’ve been selected.”</p>
+      <p>“Uploading consciousness...”</p>
+    </div>
   </div>
-</div>
+
+  <script src="game.js"></script>
+</body>
+</html>
