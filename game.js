@@ -4,12 +4,17 @@ const terminal = document.getElementById("terminal");
 const responseText = document.getElementById("response-text");
 const glitchSound = document.getElementById("glitch-sound");
 const redDoorDiv = document.getElementById("red-door");
-const startScreen = document.getElementById("start-screen");
 const startBtn = document.getElementById("start-btn");
+const smsPopup = document.getElementById("sms-popup");
+const closeSMS = document.getElementById("close-sms");
 
 startBtn.addEventListener("click", () => {
-  startScreen.classList.add("hidden");
+  document.getElementById("start-screen").classList.add("hidden");
   startGame();
+});
+
+closeSMS.addEventListener("click", () => {
+  smsPopup.classList.add("hidden");
 });
 
 function startGame() {
@@ -32,13 +37,10 @@ function startGame() {
       terminal.classList.remove("hidden");
       document.querySelector(".choices").style.display = "block";
 
-      // Simulate SMS
-      setTimeout(() => {
-        responseText.textContent = "📩 SMS: Here is the code 6729 Subject 07.";
-      }, 1500);
-
-    }, 3000);
-  }, 1000);
+      // Show SMS
+      smsPopup.classList.remove("hidden");
+    }, 2000);
+  }, 2000);
 }
 
 function respond(choice) {
@@ -68,7 +70,7 @@ function respond(choice) {
 }
 
 function redDoor() {
-  glitch.classList.add("hidden");
+  terminal.classList.add("hidden");
   redDoorDiv.classList.remove("hidden");
   glitchSound.pause();
 }
@@ -80,4 +82,3 @@ function openDoor() {
     alert("Chapter 2 coming soon...");
   }, 3000);
 }
-
