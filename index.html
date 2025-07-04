@@ -7,14 +7,17 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Boot Screen -->
   <div id="ps-boot">
     <p class="boot-text">Sony Computer Entertainment</p>
   </div>
 
+  <!-- Glitch Crash -->
   <div id="glitch-crash" class="hidden">
     <p class="glitch-text">ERROR 0x80070005<br>UNAUTHORIZED ACCESS</p>
   </div>
 
+  <!-- Terminal Screen -->
   <div id="terminal" class="hidden">
     <p>> Welcome back, Subject 07</p>
     <p>> Do you still remember the truth?</p>
@@ -26,6 +29,10 @@
     <p id="response-text"></p>
   </div>
 
+  <!-- Sound (with loop) -->
+  <audio id="glitch-sound" src="glitch.mp3" loop></audio>
+
+  <!-- Script -->
   <script src="game.js"></script>
 </body>
 </html>
