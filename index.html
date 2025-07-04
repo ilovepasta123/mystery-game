@@ -101,10 +101,14 @@
         });
 
         // Game Over Condition (enemy reaches player)
-        if (enemy.y > player.y - 20) {
-          alert("Game Over! Score: " + score);
-          window.location.reload();
-        }
+      if (
+  enemy.y + enemy.height >= player.y && // vertical overlap
+  enemy.y <= player.y + player.height &&
+  enemy.x + enemy.width >= player.x &&  // horizontal overlap
+  enemy.x <= player.x + player.width
+) {
+  gameOver();
+}
       });
 
       requestAnimationFrame(update);
