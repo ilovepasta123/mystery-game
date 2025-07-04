@@ -47,27 +47,41 @@ function respond(choice) {
   document.querySelector(".choices").style.display = "none";
 
   if (choice === "A") {
-    const code = prompt("Enter access code:");
-    if (code === "1701" || code === "6729") {
-      responseText.textContent = "CODE ACCEPTED.";
-      setTimeout(() => {
-        terminal.classList.add("hidden");
-        redDoor();
-      }, 2000);
-      return;
-    } else {
-      responseText.textContent = "ACCESS DENIED. CODE UNRECOGNIZED.";
-    }
+    // Show SMS FIRST before prompting code
+    smsPopup.classList.remove("hidden");
+
+    closeSMS.onclick = () => {
+      smsPopup.classList.add("hidden");
+
+      // Then ask for the code
+      const code = prompt("Enter access code:");
+      if (code === "1701" || code === "6729") {
+        responseText.textContent = "CODE ACCEPTED.";
+        setTimeout(() => {
+          terminal.classList.add("hidden");
+          redDoor();
+        }, 2000);
+      } else {
+        responseText.textContent = "ACCESS DENIED. CODE UNRECOGNIZED.";
+        setTimeout(() => {
+          startGame();
+        }, 3000);
+      }
+    };
+
   } else if (choice === "B") {
     responseText.textContent = "SILENCE... JUST LIKE BEFORE.";
+    setTimeout(() => {
+      startGame();
+    }, 3000);
   } else if (choice === "C") {
     responseText.textContent = "I am what’s left of you.";
+    setTimeout(() => {
+      startGame();
+    }, 3000);
   }
-
-  setTimeout(() => {
-    startGame();
-  }, 3000);
 }
+
 
 function redDoor() {
   terminal.classList.add("hidden");
