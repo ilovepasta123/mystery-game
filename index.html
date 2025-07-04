@@ -1,9 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+ 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Forbidden Game</title>
+  <title>Chapter 3 - Tunnel Shooter</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: black;
+    }
+    canvas {
+      display: block;
+    }
+    #hud {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      color: #00ffcc;
+      font-family: monospace;
+      font-size: 18px;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="hud">Score: <span id="score">0</span></div>
+  <canvas id="gameCanvas"></canvas>
+
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let score = 0;
+    let bullets = [];
+    let enemies = [];
+
+    const player = {
+      x: canvas.width / 2,
+      y: canvas.height - 100,
+      radius: 20
+    };
+
+    function drawPlayer() {
+      ctx.beginPath();
+      ctx.arc(player.x, player.y, player.radius, 0, Math.PI * 2);
+      ctx.fillStyle = "#00ffcc";
+      ctx.fill();
+      ctx.closePath();
+    }
+
+    function drawBullet(bullet) {
+      ctx.fillStyle = "white";
+      ctx.fillRect(bullet.x - 2, bullet.y, 4, 10);
+    }
+
+    function drawEnemy(enemy) {
+      ctx.fillStyle = "crimson";
+      ctx.beginPath();
+      ctx.arc(enemy.x, enemy.y, 15, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.closePath();
+    }
+
+    function shootBullet() {
+      bullets.push({ x: player.x, y: player.y - 20 });
+    }
+
+    function spawnEnemy() {
+      enemies.push({ x: Math.random() * canvas.width, y: -20 });
+    }
+
+    function update() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawPlayer();
+
+      bullets.forEach((bullet, index) => {
+        bullet.y -= 10;
+        drawBullet(bullet);
+        if (bullet.y < 0) bullets.splice(index, 1);
+      });
+
+      enemies.forEach((enemy, eIndex) => {
+        enemy.y += 3;
+        drawEnemy(enemy);
+
+        // Collision detection
+        bullets.forEach((bullet, bIndex) => {
+          if (
+            Math.hypot(bullet.x - enemy.x, bullet.y - enemy.y) < 15
+          ) {
+            enemies.splice(eIndex, 1);
+            bullets.splice(bIndex, 1);
+            score++;
+            document.getElementById("score").textContent = score;
+          }
+        });
+
+        // Game Over Condition (enemy reaches player)
+        if (enemy.y > player.y - 20) {
+          alert("Game Over! Score: " + score);
+          window.location.reload();
+        }
+      });
+
+      requestAnimationFrame(update);
+    }
+
+    window.addEventListener("mousemove", (e) => {
+      player.x = e.clientX;
+    });
+
+    window.addEventListener("click", shootBullet);
+
+    setInterval(spawnEnemy, 800);
+    update();
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Forbidden Game - Chapter 2</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     body {
@@ -19,7 +137,7 @@
       display: none;
     }
 
-    #start-screen, #ps-boot, #glitch-crash, #terminal, #red-door, #name-screen, #mission-screen, #disappointed, #game-screen {
+    #name-screen, #mission-screen, #disappointed, #game-screen, #terminal-screen {
       margin-top: 25vh;
     }
 
@@ -61,33 +179,22 @@
   </style>
 </head>
 <body>
-  <div id="start-screen">
-    <button onclick="startGameIntro()">Start</button>
-  </div>
-
-  <div id="ps-boot" class="hidden">
-    <p class="boot-text">Welcome back Subject 07</p>
-  </div>
-
-  <div id="glitch-crash" class="hidden">
-    <p class="glitch-text">SYSTEM ERROR... RECONNECTING...</p>
-  </div>
-
-  <div id="terminal" class="hidden">
-    <p>&gt; Welcome back, Subject 07</p>
-    <p>&gt; Do you still remember the truth?</p>
+  <div id="terminal-screen">
+    <p>> Welcome back, Subject 07</p>
+    <p>> Do you still remember the truth?</p>
     <div class="choices">
       <button onclick="respond('A')">[ A ] Enter the code</button>
       <button onclick="respond('B')">[ B ] Say nothing</button>
       <button onclick="respond('C')">[ C ] Ask “Who are you?”</button>
       <button onclick="respond('D')">[ D ] Clues here maybe</button>
     </div>
+    <div id="clue-options" class="hidden">
+      <p>Choose your clue:</p>
+      <button onclick="chooseClue('The key is not a number.')">Clue 1</button>
+      <button onclick="chooseClue('The code lies in the past.')">Clue 2</button>
+      <button onclick="chooseClue('Remember the hallway.')">Clue 3</button>
+    </div>
     <p id="response-text"></p>
-  </div>
-
-  <div id="red-door" class="hidden">
-    <p class="door-text">A door appears before you, glowing red.<br>Do you open it?</p>
-    <button onclick="openDoor()">&gt; Open the door</button>
   </div>
 
   <div id="name-screen" class="hidden">
@@ -116,39 +223,21 @@
     let playerName = "";
     let ctx, player, ammo, score, missed;
 
-    function startGameIntro() {
-      document.getElementById("start-screen").classList.add("hidden");
-      document.getElementById("ps-boot").classList.remove("hidden");
-      setTimeout(() => {
-        document.getElementById("ps-boot").classList.add("hidden");
-        document.getElementById("glitch-crash").classList.remove("hidden");
-        setTimeout(() => {
-          document.getElementById("glitch-crash").classList.add("hidden");
-          document.getElementById("terminal").classList.remove("hidden");
-        }, 2000);
-      }, 2000);
-    }
-
     function respond(option) {
-      const responseText = document.getElementById("response-text");
-      if (option === 'A') {
-        responseText.textContent = "Correct. Access granted.";
-        setTimeout(() => {
-          document.getElementById("terminal").classList.add("hidden");
-          document.getElementById("red-door").classList.remove("hidden");
-        }, 2000);
-      } else if (option === 'B') {
-        responseText.textContent = "... Still silent. As expected.";
-      } else if (option === 'C') {
-        responseText.textContent = "You know who I am. You just forgot.";
-      } else if (option === 'D') {
-        responseText.textContent = "Clue: It's always been in front of you. Try again.";
+      const response = document.getElementById("response-text");
+      const clues = document.getElementById("clue-options");
+      if (option === 'D') {
+        clues.classList.remove("hidden");
+        response.textContent = "Choose your clue.";
+      } else {
+        response.textContent = `You selected option ${option}.`;
+        document.getElementById("terminal-screen").classList.add("hidden");
+        document.getElementById("name-screen").classList.remove("hidden");
       }
     }
 
-    function openDoor() {
-      document.getElementById("red-door").classList.add("hidden");
-      document.getElementById("name-screen").classList.remove("hidden");
+    function chooseClue(text) {
+      document.getElementById("response-text").textContent = text;
     }
 
     function submitName() {
@@ -176,7 +265,7 @@
       const canvas = document.getElementById("gameCanvas");
       ctx = canvas.getContext("2d");
 
-      player = { x: 180, y: 550, width: 40, height: 20, speed: 10 };
+      player = { x: 180, y: 550, width: 40, height: 20, speed: 7 };
       ammo = { x: Math.random() * 360, y: -20, width: 20, height: 20, speed: 3 };
       score = 0;
       missed = 0;
