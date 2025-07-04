@@ -1,3 +1,35 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: black;
+  color: lime;
+  font-family: monospace;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#start-screen {
+  text-align: center;
+}
+
+.intro-text {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  color: white;
+}
+
+#start-btn {
+  font-size: 2rem;
+  padding: 20px 40px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
 .hidden {
   display: none;
 }
