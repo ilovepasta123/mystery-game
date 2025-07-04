@@ -1,14 +1,15 @@
-
-    const boot = document.getElementById("ps-boot");
+const boot = document.getElementById("ps-boot");
 const glitch = document.getElementById("glitch-crash");
 const terminal = document.getElementById("terminal");
 const responseText = document.getElementById("response-text");
 const glitchSound = document.getElementById("glitch-sound");
 const redDoorDiv = document.getElementById("red-door");
+const startScreen = document.getElementById("start-screen");
 const startBtn = document.getElementById("start-btn");
 
 startBtn.addEventListener("click", () => {
-  startBtn.style.display = "none";
+  startScreen.classList.add("hidden");
+  boot.classList.remove("hidden");
   startGame();
 });
 
@@ -19,6 +20,7 @@ function startGame() {
   redDoorDiv.classList.add("hidden");
   responseText.textContent = "";
 
+  // Boot → Glitch → Terminal
   setTimeout(() => {
     boot.classList.add("hidden");
     glitch.classList.remove("hidden");
@@ -31,8 +33,8 @@ function startGame() {
       glitch.classList.add("hidden");
       terminal.classList.remove("hidden");
       document.querySelector(".choices").style.display = "block";
-    }, 3000);
-  }, 2000);
+    }, 1500); // glitch duration
+  }, 1000); // boot duration
 }
 
 function respond(choice) {
@@ -72,6 +74,7 @@ function respond(choice) {
 
 function redDoor() {
   glitch.classList.add("hidden");
+  terminal.classList.add("hidden");
   redDoorDiv.classList.remove("hidden");
   glitchSound.pause();
 }
