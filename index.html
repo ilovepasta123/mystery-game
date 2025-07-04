@@ -2,57 +2,185 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Forbidden Game</title>
-  <link rel="stylesheet" href="style.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Forbidden Game - Chapter 2</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background-color: black;
+      color: #00ffcc;
+      font-family: 'Share Tech Mono', monospace;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #name-screen, #mission-screen, #disappointed, #game-screen {
+      margin-top: 25vh;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 1em;
+      width: 80%;
+      max-width: 300px;
+      margin-top: 15px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-top: 20px;
+      font-size: 1em;
+      background-color: transparent;
+      border: 1px solid #00ffcc;
+      color: #00ffcc;
+      cursor: pointer;
+    }
+
+    #disappointed p {
+      color: crimson;
+      font-size: 1.5em;
+      animation: flicker 0.15s infinite;
+    }
+
+    canvas {
+      background: #111;
+      display: block;
+      margin: 0 auto;
+    }
+
+    @keyframes flicker {
+      0% { opacity: 1; }
+      50% { opacity: 0.4; }
+      100% { opacity: 1; }
+    }
+  </style>
 </head>
 <body>
-  <!-- Start Button Screen -->
-  <div id="start-screen">
-    <button id="start-btn">Start</button>
+  <div id="name-screen">
+    <p>Welcome back, Subject 07.<br>We're glad you made it back.<br>Now tell me... what is your name?</p>
+    <input type="text" id="player-name" placeholder="Enter your name" />
+    <br />
+    <button onclick="submitName()">Submit</button>
   </div>
 
-  <!-- Fake Boot Screen -->
-  <div id="ps-boot" class="hidden">
-    <p class="boot-text">Welcome back, Subject 07</p>
+  <div id="mission-screen" class="hidden">
+    <p id="welcome-text"></p>
+    <p>Are you ready for your next mission?</p>
+    <button onclick="nextMission(true)">Yes</button>
+    <button onclick="nextMission(false)">No</button>
   </div>
 
-  <!-- Glitch Crash -->
-  <div id="glitch-crash" class="hidden">
-    <p class="glitch-text">ERROR 0x80070005<br>UNAUTHORIZED ACCESS</p>
+  <div id="disappointed" class="hidden">
+    <p id="disappointed-text"></p>
   </div>
 
-  <!-- Terminal -->
-  <div id="terminal" class="hidden">
-  <p>> Welcome back, Subject 07</p>
-  <p>> Do you still remember the truth?</p>
-  <div class="choices">
-    <button onclick="respond('A')">[ A ] Enter the code</button>
-    <button onclick="respond('B')">[ B ] Say nothing</button>
-    <button onclick="respond('C')">[ C ] Ask “Who are you?”</button>
-    <button onclick="respond('D')">[ D ] clues here maybe</button>
+  <div id="game-screen" class="hidden">
+    <canvas id="gameCanvas" width="400" height="600"></canvas>
   </div>
-  <p id="response-text"></p>
-</div>
 
-  <!-- Red Door -->
-  <div id="red-door" class="hidden">
-    <p class="door-text">A door appears before you, glowing red.<br>Do you open it?</p>
-    <button onclick="openDoor()">> Open the door</button>
-  </div>
-  
-  <!-- Name Input Scene -->
-<div id="name-input-scene" class="hidden">
-  <p class="door-text">Welcome back, Subject 07.<br>We are glad that you made it back.<br>Now tell me... what is your name?</p>
-  <input type="text" id="player-name" placeholder="Enter your name" />
-  <button onclick="submitName()">Submit</button>
-</div>
+  <script>
+    let playerName = "";
+    let ctx, player, ammo, score, missed;
 
+    function submitName() {
+      const input = document.getElementById("player-name");
+      playerName = input.value.trim();
+      if (playerName === "") return;
 
-  <!-- Audio -->
-  <audio id="glitch-sound" src="glitch.mp3" loop></audio>
+      document.getElementById("name-screen").classList.add("hidden");
+      document.getElementById("mission-screen").classList.remove("hidden");
+      document.getElementById("welcome-text").textContent = `Welcome to the journey, ${playerName}.`;
+    }
 
-  <!-- Script -->
-  <script src="game.js"></script>
+    function nextMission(accepted) {
+      document.getElementById("mission-screen").classList.add("hidden");
+      if (accepted) {
+        startGame();
+      } else {
+        document.getElementById("disappointed").classList.remove("hidden");
+        document.getElementById("disappointed-text").innerHTML = `You were the chosen one, ${playerName}... and you turned away.`;
+      }
+    }
+
+    function startGame() {
+      document.getElementById("game-screen").classList.remove("hidden");
+      const canvas = document.getElementById("gameCanvas");
+      ctx = canvas.getContext("2d");
+
+      player = { x: 180, y: 550, width: 40, height: 20, speed: 5 };
+      ammo = { x: Math.random() * 360, y: -20, width: 20, height: 20, speed: 3 };
+      score = 0;
+      missed = 0;
+
+      document.addEventListener("keydown", handleKey);
+      requestAnimationFrame(gameLoop);
+    }
+
+    function handleKey(e) {
+      if (e.key === "ArrowLeft" || e.key.toLowerCase() === "a") {
+        player.x -= player.speed;
+      } else if (e.key === "ArrowRight" || e.key.toLowerCase() === "d") {
+        player.x += player.speed;
+      }
+      player.x = Math.max(0, Math.min(360, player.x));
+    }
+
+    function gameLoop() {
+      ctx.clearRect(0, 0, 400, 600);
+
+      // Draw player
+      ctx.fillStyle = "#00ffcc";
+      ctx.fillRect(player.x, player.y, player.width, player.height);
+
+      // Draw ammo
+      ctx.fillStyle = "crimson";
+      ctx.fillRect(ammo.x, ammo.y, ammo.width, ammo.height);
+
+      // Move ammo
+      ammo.y += ammo.speed;
+
+      // Check collision
+      if (
+        ammo.y + ammo.height >= player.y &&
+        ammo.x + ammo.width >= player.x &&
+        ammo.x <= player.x + player.width
+      ) {
+        score++;
+        resetAmmo();
+      } else if (ammo.y > 600) {
+        missed++;
+        resetAmmo();
+      }
+
+      // Show score
+      ctx.fillStyle = "white";
+      ctx.font = "16px monospace";
+      ctx.fillText("Ammo Collected: " + score, 10, 20);
+      ctx.fillText("Missed: " + missed, 10, 40);
+
+      if (score >= 5) {
+        alert("Mission Complete! You collected enough ammo.");
+        location.reload();
+      } else if (missed >= 3) {
+        alert("Mission Failed. Try again.");
+        score = 0;
+        missed = 0;
+        player.x = 180;
+        resetAmmo();
+      }
+
+      requestAnimationFrame(gameLoop);
+    }
+
+    function resetAmmo() {
+      ammo.x = Math.random() * 360;
+      ammo.y = -20;
+    }
+  </script>
 </body>
 </html>
