@@ -2,11 +2,14 @@ const boot = document.getElementById("ps-boot");
 const glitch = document.getElementById("glitch-crash");
 const terminal = document.getElementById("terminal");
 const responseText = document.getElementById("response-text");
+const glitchSound = document.getElementById("glitch-sound");
 
-// Fake boot sequence
+// Initial Boot Sequence
 setTimeout(() => {
   boot.classList.add("hidden");
   glitch.classList.remove("hidden");
+  glitchSound.currentTime = 0;
+  glitchSound.play();
 
   setTimeout(() => {
     glitch.classList.add("hidden");
@@ -14,8 +17,10 @@ setTimeout(() => {
   }, 3000);
 }, 2000);
 
-// Choice handling
+// Handle Choices
 function respond(choice) {
+  document.querySelector(".choices").style.display = "none";
+
   if (choice === "A") {
     responseText.textContent = "ACCESS DENIED. CODE UNRECOGNIZED.";
   } else if (choice === "B") {
@@ -23,4 +28,24 @@ function respond(choice) {
   } else if (choice === "C") {
     responseText.textContent = "I am what’s left of you.";
   }
+
+  // Restart the boot sequence
+  setTimeout(() => {
+    terminal.classList.add("hidden");
+    boot.classList.remove("hidden");
+
+    setTimeout(() => {
+      boot.classList.add("hidden");
+      glitch.classList.remove("hidden");
+      glitchSound.currentTime = 0;
+      glitchSound.play();
+
+      setTimeout(() => {
+        glitch.classList.add("hidden");
+        terminal.classList.remove("hidden");
+        document.querySelector(".choices").style.display = "block";
+        responseText.textContent = "";
+      }, 3000);
+    }, 2000);
+  }, 3000);
 }
