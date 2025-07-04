@@ -24,3 +24,4 @@ function respond(choice) {
     responseText.textContent = "I am what’s left of you.";
   }
 }
+
