@@ -38,9 +38,9 @@ function startGame() {
 function respond(choice) {
   document.querySelector(".choices").style.display = "none";
 
-  if (choice === "A" || choice === "D"){
+  if (choice === "A" || choice === "D") {
     const code = prompt("Enter access code:");
-    (code === "1701" || code === "6729") {
+    if (code === "1701" || code === "6729") {
       responseText.textContent = "CODE ACCEPTED.";
       setTimeout(() => {
         terminal.classList.add("hidden");
@@ -54,6 +54,8 @@ function respond(choice) {
     responseText.textContent = "SILENCE... JUST LIKE BEFORE.";
   } else if (choice === "C") {
     responseText.textContent = "I am what’s left of you.";
+      else if (choice === "D")
+       responseText.textContent = "code is 6729 and 1701.";
   }
 
   setTimeout(() => {
