@@ -38,9 +38,9 @@ function startGame() {
 function respond(choice) {
   document.querySelector(".choices").style.display = "none";
 
-  if (choice === "A") {
+  if (choice === "A" || choice === "D"){
     const code = prompt("Enter access code:");
-    if (code === "1701") {
+    (code === "1701" || code === "6729") {
       responseText.textContent = "CODE ACCEPTED.";
       setTimeout(() => {
         terminal.classList.add("hidden");
