@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+ @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
 body {
   background-color: black;
-  color: #00ffcc;
+  color: white;
   font-family: 'Share Tech Mono', monospace;
   text-align: center;
   margin: 0;
@@ -13,16 +14,20 @@ body {
   display: none;
 }
 
-#start-btn {
-  margin-top: 20vh;
-  padding: 10px 30px;
-  font-size: 1.2em;
-  cursor: pointer;
-}
-
 .boot-text {
   font-size: 2em;
+  color: #00ffcc;
   margin-top: 20vh;
+}
+
+#start-btn {
+  margin-top: 40vh;
+  padding: 12px 30px;
+  font-size: 1.5em;
+  cursor: pointer;
+  border: none;
+  background-color: #00ffcc;
+  color: black;
 }
 
 .glitch-text {
