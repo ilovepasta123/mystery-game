@@ -40,6 +40,14 @@
     <p class="door-text">A door appears before you, glowing red.<br>Do you open it?</p>
     <button onclick="openDoor()">> Open the door</button>
   </div>
+  
+  <!-- Name Input Scene -->
+<div id="name-input-scene" class="hidden">
+  <p class="door-text">Welcome back, Subject 07.<br>We are glad that you made it back.<br>Now tell me... what is your name?</p>
+  <input type="text" id="player-name" placeholder="Enter your name" />
+  <button onclick="submitName()">Submit</button>
+</div>
+
 
   <!-- Audio -->
   <audio id="glitch-sound" src="glitch.mp3" loop></audio>
